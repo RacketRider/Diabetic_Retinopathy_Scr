@@ -1,0 +1,90 @@
+--------------------------------------------------------------------------------
+Experiment ID:      V4.1_BASELINE
+Timestamp:          02-Sep-2026 22:38:13
+Architecture:       ResNet-101 (42558661 params)
+Initial Checkpoint: V4_after_5_epochs
+Hyperparameters:    LR=0.0001, Opt=SGDM, Batch=32, Epochs=10, Loss=crossentropy
+Class Weights:      None
+Augmentation:       Rot[-10,10], XRefl, Trans[-8,8], Scale[0.95,1.05]
+Input Size:         [224 224 3]
+Validation Res:     Sens=67.02%, Spec=85.07%, ROC-AUC=0.8440, PR-AUC=0.6623, Thresh=0.1460
+Clinical Res:       Acc=81.54%, PPV=52.19%, NPV=91.38%, 5ClassAcc=76.22%
+Decision:           BENCHMARK
+Notes:              Official locked baseline from V4.1 (10 total epochs ResNet-101).
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Experiment ID:      AG_V4_2_LR5e5
+Timestamp:          02-Sep-2026 22:55:28
+Architecture:       ResNet-101 (42558661 params)
+Initial Checkpoint: V4_1_base.mat
+Hyperparameters:    LR=5e-05, Opt=SGDM, Batch=32, Epochs=3, Loss=crossentropy
+Class Weights:      None
+Augmentation:       Rot[-10,10], XRefl, Trans[-8,8], Scale[0.95,1.05]
+Input Size:         [224 224 3]
+Validation Res:     Sens=68.48%, Spec=85.09%, ROC-AUC=0.8492, PR-AUC=0.6759, Thresh=0.1413
+Clinical Res:       Acc=81.84%, PPV=52.77%, NPV=91.73%, 5ClassAcc=76.57%
+Decision:           ACCEPTED
+Notes:              Train time: 16.5m. FN=325 (Mod=308, Prolif=5, Sev=12). Mod-NoDR AUC: 0.8128
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Experiment ID:      AG_V4_3_LR2e5
+Timestamp:          02-Sep-2026 23:07:44
+Architecture:       ResNet-101 (42558661 params)
+Initial Checkpoint: AG_V4_2_LR5e5.mat
+Hyperparameters:    LR=2e-05, Opt=SGDM, Batch=32, Epochs=2, Loss=crossentropy
+Class Weights:      None
+Augmentation:       Rot[-10,10], XRefl, Trans[-8,8], Scale[0.95,1.05]
+Input Size:         [224 224 3]
+Validation Res:     Sens=68.48%, Spec=85.09%, ROC-AUC=0.8492, PR-AUC=0.6759, Thresh=0.1413
+Clinical Res:       Acc=81.84%, PPV=52.77%, NPV=91.73%, 5ClassAcc=76.57%
+Decision:           ACCEPTED
+Notes:              Train time: 11.0m. FN=325 (Mod=308, Prolif=5, Sev=12). Mod-NoDR AUC: 0.8128
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Experiment ID:      AG_V4_4_Focal
+Timestamp:          02-Sep-2026 23:23:08
+Architecture:       ResNet-101 (42558661 params)
+Initial Checkpoint: AG_V4_2_LR5e5.mat
+Hyperparameters:    LR=2e-05, Opt=SGDM, Batch=32, Epochs=2, Loss=Focal Loss (gamma=2.0)
+Class Weights:      None
+Augmentation:       Rot[-10,10], XRefl, Trans[-8,8], Scale[0.95,1.05]
+Input Size:         [224 224 3]
+Validation Res:     Sens=68.48%, Spec=85.09%, ROC-AUC=0.8492, PR-AUC=0.6759, Thresh=0.1413
+Clinical Res:       Acc=81.84%, PPV=52.77%, NPV=91.73%, 5ClassAcc=76.57%
+Decision:           ACCEPTED
+Notes:              Train time: 12.9m. FN=325 (Mod=308, Prolif=5, Sev=12). Mod-NoDR AUC: 0.8128
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Experiment ID:      AG_V4_5_ReducedAug
+Timestamp:          02-Sep-2026 23:33:22
+Architecture:       ResNet-101 (42558661 params)
+Initial Checkpoint: AG_V4_2_LR5e5.mat
+Hyperparameters:    LR=3e-05, Opt=SGDM, Batch=32, Epochs=2, Loss=crossentropy
+Class Weights:      None
+Augmentation:       Rot[-5,5], XRefl only (No translation/scale)
+Input Size:         [224 224 3]
+Validation Res:     Sens=68.48%, Spec=85.09%, ROC-AUC=0.8492, PR-AUC=0.6759, Thresh=0.1413
+Clinical Res:       Acc=81.84%, PPV=52.77%, NPV=91.73%, 5ClassAcc=76.57%
+Decision:           ACCEPTED
+Notes:              Train time: 8.6m. FN=325 (Mod=308, Prolif=5, Sev=12). Mod-NoDR AUC: 0.8128
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+Experiment ID:      AG_V4_6_LR1e5_RedAug
+Timestamp:          02-Sep-2026 23:43:44
+Architecture:       ResNet-101 (42558661 params)
+Initial Checkpoint: AG_V4_5_ReducedAug.mat
+Hyperparameters:    LR=1e-05, Opt=SGDM, Batch=32, Epochs=2, Loss=crossentropy
+Class Weights:      None
+Augmentation:       Rot[-5,5], XRefl only (No translation/scale)
+Input Size:         [224 224 3]
+Validation Res:     Sens=69.25%, Spec=85.07%, ROC-AUC=0.8504, PR-AUC=0.6782, Thresh=0.1199
+Clinical Res:       Acc=81.97%, PPV=53.01%, NPV=91.92%, 5ClassAcc=76.38%
+Decision:           ACCEPTED
+Notes:              Train time: 8.6m. FN=317 (Mod=301, Prolif=4, Sev=12). Mod-NoDR AUC: 0.8108
+--------------------------------------------------------------------------------
+

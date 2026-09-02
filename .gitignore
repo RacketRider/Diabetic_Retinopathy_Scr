@@ -1,0 +1,17 @@
+﻿# Large binary MAT checkpoint files (>100MB blocked by GitHub)
+*.mat
+!ANTIGRAVITY/results/*.mat
+!ANTIGRAVITY/logs/*.mat
+!DR_V12_FINAL_BASELINE.mat
+!DR_V21_CLASS_WEIGHTS.mat
+
+# MATLAB temporary and autosave files
+*.asv
+*.autosave
+*~
+*.bak
+
+# OS generated files
+.DS_Store
+Thumbs.db
+Desktop.ini
