@@ -1,17 +1,30 @@
-﻿# Large binary MAT checkpoint files (>100MB blocked by GitHub)
-*.mat
-!ANTIGRAVITY/results/*.mat
-!ANTIGRAVITY/logs/*.mat
-!DR_V12_FINAL_BASELINE.mat
-!DR_V21_CLASS_WEIGHTS.mat
+﻿# Local datasets and split artifacts (never commit)
+data/*
+!data/README.md
 
-# MATLAB temporary and autosave files
+# Model checkpoints (never commit)
+models/*
+!models/README.md
+
+# Large MATLAB binaries; keep only lightweight research artifacts
+*.mat
+!artifacts/baselines/*.mat
+!artifacts/logs/*.mat
+!artifacts/results/*.mat
+
+# MATLAB temporary files
 *.asv
 *.autosave
 *~
 *.bak
 
-# OS generated files
+# Generated local test/lint output
+.coverage/
+reports/
+
+# OS/editor noise
 .DS_Store
 Thumbs.db
 Desktop.ini
+.vscode/
+.idea/
