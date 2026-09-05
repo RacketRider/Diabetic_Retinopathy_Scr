@@ -6,11 +6,21 @@ data/*
 models/*
 !models/README.md
 
-# Large MATLAB binaries; keep only lightweight research artifacts
+# Generated runtime/evaluation artifacts; retain only calibrated operating points
+artifacts/*
+!artifacts/results/
+artifacts/results/*
+!artifacts/results/V3/
+artifacts/results/V3/*
+!artifacts/results/V3/V3_E1_HighResFOV448/
+!artifacts/results/V3/V3_E3_RetinaWalker/
+artifacts/results/V3/V3_E1_HighResFOV448/*
+artifacts/results/V3/V3_E3_RetinaWalker/*
+!artifacts/results/V3/V3_E1_HighResFOV448/selected_threshold.txt
+!artifacts/results/V3/V3_E3_RetinaWalker/selected_threshold.txt
+
+# Large MATLAB binaries outside ignored data/model trees
 *.mat
-!artifacts/baselines/*.mat
-!artifacts/logs/*.mat
-!artifacts/results/*.mat
 
 # MATLAB temporary files
 *.asv
