@@ -1,0 +1,7 @@
+threshold=0.164
+sensitivity=0.672163
+specificity=0.850672
+TP=693
+TN=3606
+FP=633
+FN=338
