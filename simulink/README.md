@@ -29,10 +29,26 @@ PHC Fundus Capture (50 img/day)
 ## Files
 
 - `dr_screening_pipeline.slx` — Simulink model (requires MATLAB R2024a+ with Simulink)
+- `create_dr_screening_pipeline.m` — Programmatic model generator and automated CI verification script
 - This model is visualized interactively in the web frontend's Simulink tab
+
+## Running the Simulation
+
+### Open and Simulate via MATLAB GUI:
+```matlab
+addpath('simulink');
+open_system('dr_screening_pipeline');
+simOut = sim('dr_screening_pipeline');
+```
+
+### Programmatic Re-generation and Automated Verification:
+```matlab
+run('simulink/create_dr_screening_pipeline.m');
+```
 
 ## Requirements
 
 - MATLAB R2024a or later
 - Simulink
 - Simulink Report Generator (optional, for PDF export)
+

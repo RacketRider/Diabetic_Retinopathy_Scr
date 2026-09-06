@@ -18,7 +18,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "backend"))
 from app.services.preprocessing import preprocess_fundus
 
 DEFAULT_MODEL = "models/dr_resnet101_e1.onnx"
-CLASS_NAMES = ["Severe", "No_DR", "Mild", "Proliferate_DR", "Moderate"]
+CLASS_NAMES = ["Mild", "Moderate", "No_DR", "Proliferate_DR", "Severe"]
 
 
 def load_and_preprocess(image_path: str, target_size: int = 448) -> np.ndarray:
@@ -85,7 +85,7 @@ def main():
     print(f"\nRaw logits: {raw_output}")
     print(f"\nClass probabilities:")
     for name, prob in zip(CLASS_NAMES, probs):
-        marker = " ← predicted" if prob == probs.max() else ""
+        marker = " <- predicted" if prob == probs.max() else ""
         print(f"  {name:20s}: {prob:.4f}{marker}")
 
     predicted = CLASS_NAMES[int(np.argmax(probs))]
@@ -103,12 +103,12 @@ def main():
         print(f"MATLAB probs: {matlab}")
         print(f"Max absolute difference: {max_diff:.6f}")
         if max_diff < 1e-3:
-            print("✅ PASS: ONNX output matches MATLAB within 1e-3 tolerance")
+            print("[PASS] ONNX output matches MATLAB within 1e-3 tolerance")
         else:
-            print("❌ FAIL: ONNX output diverges from MATLAB beyond 1e-3")
+            print("[FAIL] ONNX output diverges from MATLAB beyond 1e-3")
             sys.exit(1)
     else:
-        print("\n⚠️  No MATLAB reference provided — run with --matlab-probs to verify parity")
+        print("\n[NOTE] No MATLAB reference provided -- run with --matlab-probs to verify parity")
 
 
 if __name__ == "__main__":

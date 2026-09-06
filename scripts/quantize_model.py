@@ -25,7 +25,7 @@ def main():
     if not input_path.exists():
         raise FileNotFoundError(f"Input model not found: {input_path}")
 
-    print(f"Quantizing {input_path} → {output_path}")
+    print(f"Quantizing {input_path} -> {output_path}")
     print(f"Input size: {input_path.stat().st_size / 1024 / 1024:.1f} MB")
 
     quantize_dynamic(
@@ -38,7 +38,7 @@ def main():
     input_size = input_path.stat().st_size / 1024 / 1024
     ratio = (1 - output_size / input_size) * 100
     print(f"Output size: {output_size:.1f} MB ({ratio:.0f}% reduction)")
-    print("\n⚠️  Verify AUC on validation set before deploying.")
+    print("\n[NOTE] Verify AUC on validation set before deploying.")
 
 
 if __name__ == "__main__":

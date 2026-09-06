@@ -33,12 +33,12 @@ async def generate_clinical_report(request: Request, image: UploadFile = File(..
     Includes DR grading, Grad-CAM overlay, lesion evidence,
     and clinical recommendation.
     """
-    if not is_model_loaded():
-        raise HTTPException(status_code=503, detail="Model not loaded.")
-
-    # Validate and process
+    # Validate and process upload first
     clean_image = await validate_upload(image)
     image_np = pil_to_numpy(clean_image)
+
+    if not is_model_loaded():
+        raise HTTPException(status_code=503, detail="Model not loaded.")
 
     # Quality check
     quality = assess_quality(image_np)

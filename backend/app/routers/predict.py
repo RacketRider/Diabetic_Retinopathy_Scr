@@ -26,12 +26,12 @@ async def predict_dr(request: Request, image: UploadFile = File(...)):
     Returns ICDR severity level (0-4), confidence scores,
     and image quality assessment.
     """
-    if not is_model_loaded():
-        raise HTTPException(status_code=503, detail="Model not loaded. Please ensure the ONNX model file exists.")
-
-    # Validate and sanitize upload
+    # Validate and sanitize upload first
     clean_image = await validate_upload(image)
     image_np = pil_to_numpy(clean_image)
+
+    if not is_model_loaded():
+        raise HTTPException(status_code=503, detail="Model not loaded. Please ensure the ONNX model file exists.")
 
     # Assess image quality
     quality = assess_quality(image_np)

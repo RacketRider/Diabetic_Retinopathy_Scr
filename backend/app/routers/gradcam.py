@@ -32,14 +32,14 @@ async def gradcam_analysis(request: Request, image: UploadFile = File(...)):
     Returns the DR classification plus an attention heatmap overlay,
     detected lesion regions, and clinical evidence text.
     """
-    if not is_model_loaded():
-        raise HTTPException(status_code=503, detail="Model not loaded.")
-
     t0 = time.perf_counter()
 
-    # Validate and process
+    # Validate and process upload first
     clean_image = await validate_upload(image)
     image_np = pil_to_numpy(clean_image)
+
+    if not is_model_loaded():
+        raise HTTPException(status_code=503, detail="Model not loaded.")
 
     # Run inference
     result = predict(image_np)

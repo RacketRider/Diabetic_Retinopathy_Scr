@@ -5,7 +5,7 @@
 
 const ALLOWED_TYPES = new Set(['image/jpeg', 'image/png']);
 const MAX_FILE_SIZE = 15 * 1024 * 1024; // 15 MB
-const MIN_DIMENSION = 256;
+const MIN_DIMENSION = 224;
 
 // JPEG magic bytes: FF D8 FF
 // PNG magic bytes: 89 50 4E 47
