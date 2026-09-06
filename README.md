@@ -81,3 +81,25 @@ with the authoritative split and keep matching originals under the high-resoluti
 source tree. E1 retrains from `AG_V4_5_ReducedAug.mat`. E3 resumes only when its
 saved `latest` checkpoint matches the exact configuration and ordered split;
 move old E3 resume checkpoints aside before starting a genuinely new dataset run.
+
+How to run:
+matlab
+    % Run from the project root
+    addpath("src");
+
+    imagePath = "path/to/retina_image.jpg";
+
+    checkpoint = load("models/V3_E1_HighResFOV448.mat", ...
+                      "netTrained", "config");
+    metadata = load("data/DR_V4_RESNET101_SCREENING.mat", ...
+                    "classNames");
+
+    image = preprocessFundus(imagePath, checkpoint.config.inputResolution);
+    scores = minibatchpredict(checkpoint.netTrained, image);
+
+    [confidence, index] = max(scores, [], 2);
+    diagnosis = string(metadata.classNames(index));
+
+    fprintf("Prediction: %s\nConfidence: %.2f%%\n", ...
+            diagnosis, confidence * 100);
+
