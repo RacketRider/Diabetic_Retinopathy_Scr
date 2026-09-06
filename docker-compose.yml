@@ -1,0 +1,50 @@
+# docker-compose.yml — One-command demo for Mode C (localhost)
+#
+# Usage:
+#   docker compose up --build
+#   Open http://localhost:5173
+#
+# The frontend dev server proxies /api/* to the backend at :8000.
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models/dr_resnet101_e1.onnx:/app/model.onnx:ro
+    environment:
+      - MODEL_PATH=/app/model.onnx
+      - ALLOWED_ORIGINS=http://localhost:5173,http://localhost:3000
+      - RATE_LIMIT=15/minute
+      - LOG_LEVEL=info
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp:size=100M
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/v1/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
